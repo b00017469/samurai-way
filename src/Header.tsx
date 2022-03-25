@@ -1,16 +1,13 @@
 import React from "react";
 
-function Technologies() {
+const Header = () => {
     return (
         <div>
-            <ul>
-                <li>CSS</li>
-                <li>HTML</li>
-                <li>REACT</li>
-                <li>JS</li>
-            </ul>
+            <a href="#s">Home</a>-
+            <a href="#s">New Feed</a>-
+            <a href="#s">Messages</a>
         </div>
     );
 }
 
-export default Technologies;
+export default Header;
