@@ -13,7 +13,6 @@ const Post = (props: PostType) => {
                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRALZAcoGIUr4WMJpsN3PqonWdIMd1oGXpbow&usqp=CAU'/>
             {props.message}
             <div><span>like</span>{props.likesCount}</div>
-
         </div>
     </div>
 }
