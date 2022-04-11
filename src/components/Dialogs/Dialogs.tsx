@@ -6,7 +6,7 @@ const Dialogs = () =>{
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
                 <div className={s.dialog + ' ' + s.active}>
-                    Dimych
+                    Dimych)
                 </div>
                 <div className={s.dialog}>
                     Masha
