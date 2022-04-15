@@ -9,19 +9,38 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 
+export type AppType = {
+    dialogs: DialogsType[]
+    messages: MessagesType[]
+    posts: PostsType[]
+}
+export type DialogsType = {
+    id: string
+    name: string
+}
+export type MessagesType = {
+    id: string
+    message: string
+}
+export type PostsType = {
+    id: string
+    message: string
+    likesCount: number
+}
 
-const App = () => {
+
+const App: React.FC<AppType> = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' component={Dialogs}/>
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogs = {props.dialogs} messages = {props.messages}/>}/>
+                    <Route path='/profile' render={() => <Profile posts = {props.posts}/>}/>
+                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/news' render={() => <News/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
                 </div>
 
             </div>

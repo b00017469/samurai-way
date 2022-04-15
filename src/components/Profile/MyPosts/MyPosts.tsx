@@ -1,15 +1,12 @@
 import React from "react";
+import { ProfileType } from "../Profile";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-    let posts = [
-        {id: '1', message: "Hello, friends!!!", likesCount: 9},
-        {id: '2', message: "This is my first post.", likesCount: 11},
-        {id: '2', message: "This is my first post.", likesCount: 11}
-    ]
 
-    let postElement = posts.map(p => <Post message={p.message} likesCount = {p.likesCount}/>)
+const MyPosts: React.FC<ProfileType> = (props) => {
+
+    let postElement = props.posts.map(p => <Post message={p.message} likesCount = {p.likesCount}/>)
 
     return <div className={s.postsBlock}>
        <h3>My posts</h3>
