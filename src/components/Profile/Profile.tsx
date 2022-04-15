@@ -2,10 +2,10 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./MyPosts/ProfileInfo/ProfileInfo";
-import {PostsType} from "../../App";
+import {ProfilePageType} from "../../Redux/State";
 
 export type ProfileType = {
-    posts: PostsType[]
+    posts: ProfilePageType
 }
 
 const Profile: React.FC<ProfileType> = (props) => {
