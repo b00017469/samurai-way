@@ -20,16 +20,16 @@ export type DialogsPageType = {
 }
 export type SidebarType = {}
 export type StateType = {
-    profilePage:ProfilePageType
-    dialogsPage:DialogsPageType
-    sidebar:SidebarType
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
 }
 let state: StateType = {
     profilePage: {
         posts: [
             {id: '1', message: "Hello, friends!!!", likesCount: 9},
             {id: '2', message: "This is my first post.", likesCount: 11},
-            {id: '2', message: "This is my first post.", likesCount: 11}
+            {id: '3', message: "This is my first post.", likesCount: 11}
         ]
     },
     dialogsPage: {
@@ -49,5 +49,10 @@ let state: StateType = {
     },
     sidebar: {}
 }
-
+export const addPost = (message:string) => {
+    debugger
+    state.profilePage.posts.push({
+        id: '4', message: message, likesCount: 0
+    })
+}
 export default state;

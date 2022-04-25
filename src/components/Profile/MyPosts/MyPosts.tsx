@@ -10,8 +10,11 @@ const MyPosts: React.FC<ProfileType> = (props) => {
     let newTextPost = React.createRef<HTMLTextAreaElement>()
 
     const onAddPost = () => {
+        debugger
         let text = newTextPost.current?.value
-        alert(text)
+        if (typeof text === "string") {
+            props.addPost(text)
+        }
     }
 
     return <div className={s.postsBlock}>
