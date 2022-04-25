@@ -15,6 +15,7 @@ type PostsType = {
 }
 export type ProfilePageType = {
     posts: PostsType[]
+    newTextAreaValue:string
 }
 export type DialogsPageType = {
     dialogs: DialogsType[]
@@ -32,7 +33,8 @@ let state: StateType = {
             {id: '1', message: "Hello, friends!!!", likesCount: 9},
             {id: '2', message: "This is my first post.", likesCount: 11},
             {id: '3', message: "This is my first post.", likesCount: 11}
-        ]
+        ],
+        newTextAreaValue: ""
     },
     dialogsPage: {
         dialogs: [
@@ -51,11 +53,16 @@ let state: StateType = {
     },
     sidebar: {}
 }
-export const addPost = (message:string) => {
+export const addNewTextareaValue =(m:string)=>{
+    state.profilePage.newTextAreaValue = m
+    rerenderRoutTree(state)
+}
+export const addPost = () => {
     debugger
     state.profilePage.posts.push({
-        id: '4', message: message, likesCount: 0
+        id: '4', message: state.profilePage.newTextAreaValue, likesCount: 0
     })
     rerenderRoutTree(state)
+    addNewTextareaValue('')
 }
 export default state;

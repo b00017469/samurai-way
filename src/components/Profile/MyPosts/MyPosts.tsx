@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEventHandler} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {ProfileType} from "../Profile";
@@ -7,13 +7,13 @@ import {ProfileType} from "../Profile";
 const MyPosts: React.FC<ProfileType> = (props) => {
 
     let postElement = props.posts.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
-    let newTextPost = React.createRef<HTMLTextAreaElement>()
+
+    const onChangeHandler = (value: string) => {
+        props.addArea(value)
+    }
 
     const onAddPost = () => {
-        let text = newTextPost.current?.value
-        if (typeof text === "string") {
-            props.addPost(text)
-        }
+        props.addPost()
     }
 
 
@@ -21,7 +21,8 @@ const MyPosts: React.FC<ProfileType> = (props) => {
         <h3>My posts</h3>
         <div>
             <div>
-                <textarea ref={newTextPost}></textarea>
+                <textarea onChange={(e) => onChangeHandler(e.currentTarget.value)}
+                          value={props.posts.newTextAreaValue}/>
             </div>
             <div>
                 <button onClick={onAddPost}>Add post</button>

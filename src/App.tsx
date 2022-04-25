@@ -8,11 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, StateType} from "./Redux/State";
+import {addNewTextareaValue, addPost, StateType} from "./Redux/State";
 
 type StateIndexType = {
     state: StateType
-    addPost: (message: string) => void
+    addPost: () => void
+    addArea: (message: string) => void
 }
 
 const App: React.FC<StateIndexType> = (props) => {
@@ -23,8 +24,10 @@ const App: React.FC<StateIndexType> = (props) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <Dialogs data={props.state.dialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile posts={props.state.profilePage}
-                                                                  addPost={addPost}/>}/>
+                    <Route path='/profile'
+                           render={() => <Profile posts={props.state.profilePage}
+                                                  addPost={addPost}
+                                                  addArea={addNewTextareaValue}/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
