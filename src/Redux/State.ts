@@ -1,3 +1,5 @@
+import {rerenderRoutTree} from "../render";
+
 type DialogsType = {
     id: string
     name: string
@@ -54,5 +56,6 @@ export const addPost = (message:string) => {
     state.profilePage.posts.push({
         id: '4', message: message, likesCount: 0
     })
+    rerenderRoutTree(state)
 }
 export default state;
