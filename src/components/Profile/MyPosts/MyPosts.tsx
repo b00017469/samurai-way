@@ -6,15 +6,22 @@ import {ProfileType} from "../Profile";
 
 const MyPosts: React.FC<ProfileType> = (props) => {
 
-    let postElement = props.posts.posts.map(p => <Post message={p.message} likesCount = {p.likesCount}/>)
+    let postElement = props.posts.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let newTextPost = React.createRef<HTMLTextAreaElement>()
+
+    const onAddPost = () => {
+        let text = newTextPost.current?.value
+        alert(text)
+    }
 
     return <div className={s.postsBlock}>
-       <h3>My posts</h3>
-        <div><div>
-            <textarea></textarea>
-        </div>
+        <h3>My posts</h3>
+        <div>
             <div>
-            <button>Add post</button>
+                <textarea ref={newTextPost}></textarea>
+            </div>
+            <div>
+                <button onClick={onAddPost}>Add post</button>
             </div>
         </div>
         <div className={s.posts}>
