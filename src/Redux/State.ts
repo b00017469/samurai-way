@@ -1,5 +1,3 @@
-import {rerenderRoutTree} from "../render";
-
 type DialogsType = {
     id: string
     name: string
@@ -15,7 +13,7 @@ type PostsType = {
 }
 export type ProfilePageType = {
     posts: PostsType[]
-    newTextAreaValue:string
+    newTextAreaValue: string
 }
 export type DialogsPageType = {
     dialogs: DialogsType[]
@@ -53,16 +51,22 @@ let state: StateType = {
     },
     sidebar: {}
 }
-export const addNewTextareaValue =(m:string)=>{
+export const addNewTextareaValue = (m: string) => {
     state.profilePage.newTextAreaValue = m
-    rerenderRoutTree(state)
+    renderTree()
 }
 export const addPost = () => {
-    debugger
     state.profilePage.posts.push({
         id: '4', message: state.profilePage.newTextAreaValue, likesCount: 0
     })
-    rerenderRoutTree(state)
+    renderTree()
     addNewTextareaValue('')
 }
+let renderTree = () => {
+    console.log('hello')
+}
+export const subscribe = (callback: () => void) => {
+    renderTree = callback
+}
+
 export default state;
