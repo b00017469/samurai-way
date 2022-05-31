@@ -8,12 +8,10 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {addNewTextareaValue, addPost, StateType} from "./Redux/State";
+import {StoreType} from "./Redux/State";
 
 type StateIndexType = {
-    state: StateType
-    addPost: () => void
-    addArea: (message: string) => void
+    store: StoreType
 }
 
 const App: React.FC<StateIndexType> = (props) => {
@@ -23,11 +21,11 @@ const App: React.FC<StateIndexType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs data={props.state.dialogsPage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage}/>}/>
                     <Route path='/profile'
-                           render={() => <Profile posts={props.state.profilePage}
-                                                  addPost={addPost}
-                                                  addArea={addNewTextareaValue}/>}/>
+                           render={() => <Profile posts={props.store.getState().profilePage}
+                                                  addPost={props.store.addPost.bind(props.store)}
+                                                  addArea={props.store.addNewTextareaValue.bind(props.store)}/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

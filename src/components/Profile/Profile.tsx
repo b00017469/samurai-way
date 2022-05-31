@@ -2,7 +2,7 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./MyPosts/ProfileInfo/ProfileInfo";
-import {addNewTextareaValue, addPost, ProfilePageType} from "../../Redux/State";
+import {ProfilePageType} from "../../Redux/State";
 
 export type ProfileType = {
     posts: ProfilePageType
@@ -13,7 +13,7 @@ export type ProfileType = {
 const Profile: React.FC<ProfileType> = (props) => {
     return <div>
        <ProfileInfo/>
-        <MyPosts posts ={props.posts} addPost={addPost} addArea={addNewTextareaValue} />
+        <MyPosts posts ={props.posts} addPost={props.addPost} addArea={props.addArea} />
     </div>
 }
 

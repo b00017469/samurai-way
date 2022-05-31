@@ -25,48 +25,61 @@ export type StateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-let state: StateType = {
-    profilePage: {
-        posts: [
-            {id: '1', message: "Hello, friends!!!", likesCount: 9},
-            {id: '2', message: "This is my first post.", likesCount: 11},
-            {id: '3', message: "This is my first post.", likesCount: 11}
-        ],
-        newTextAreaValue: ""
-    },
-    dialogsPage: {
-        dialogs: [
-            {id: '1', name: "Dimych"},
-            {id: '2', name: "Masha"},
-            {id: '3', name: "Pasha"},
-            {id: '4', name: "Victor"},
-            {id: '5', name: "Tosha"},
-            {id: '6', name: "Vova"}
-        ],
-        messages: [
-            {id: '1', message: "Hello!"},
-            {id: '2', message: "How are you?"},
-            {id: '3', message: "Be be be!!!"}
-        ]
-    },
-    sidebar: {}
-}
-export const addNewTextareaValue = (m: string) => {
-    state.profilePage.newTextAreaValue = m
-    renderTree()
-}
-export const addPost = () => {
-    state.profilePage.posts.push({
-        id: '4', message: state.profilePage.newTextAreaValue, likesCount: 0
-    })
-    renderTree()
-    addNewTextareaValue('')
-}
-let renderTree = () => {
-    console.log('hello')
-}
-export const subscribe = (callback: () => void) => {
-    renderTree = callback
+
+export type StoreType = {
+    _state: StateType
+    getState:()=>StateType
+    addPost: ()=>void
+    addNewTextareaValue:(massage: string)=>void
+    renderTree:()=>void
+    subscribe:(callback: () => void)=>void
 }
 
-export default state;
+const store: StoreType = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: '1', message: "Hello, friends!!!", likesCount: 9},
+                {id: '2', message: "This is my first post.", likesCount: 11},
+                {id: '3', message: "This is my first post.", likesCount: 11}
+            ],
+            newTextAreaValue: ""
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: '1', name: "Dimych"},
+                {id: '2', name: "Masha"},
+                {id: '3', name: "Pasha"},
+                {id: '4', name: "Victor"},
+                {id: '5', name: "Tosha"},
+                {id: '6', name: "Vova"}
+            ],
+            messages: [
+                {id: '1', message: "Hello!"},
+                {id: '2', message: "How are you?"},
+                {id: '3', message: "Be be be!!!"}
+            ]
+        },
+        sidebar: {}
+    },
+    getState(){return this._state},
+    addPost() {
+        this._state.profilePage.posts.push({
+            id: '4', message: this._state.profilePage.newTextAreaValue, likesCount: 0
+        })
+        this.renderTree()
+        this.addNewTextareaValue('')
+    },
+    addNewTextareaValue(massage: string) {
+        this._state.profilePage.newTextAreaValue = massage
+        this.renderTree()
+    },
+    renderTree() {
+        console.log('hello')
+    },
+    subscribe(callback: () => void) {
+        this.renderTree = callback
+    }
+}
+
+export default store;

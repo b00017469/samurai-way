@@ -1,16 +1,15 @@
 import React from 'react';
 import './index.css';
-import state, {subscribe} from "./Redux/State";
+import store from "./Redux/State";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addNewTextareaValue, addPost} from "./Redux/State";
 
 export const rerenderRoutTree = ()=>{
     ReactDOM.render(
-        <App state={state} addPost={addPost} addArea={addNewTextareaValue}/>,
+        <App store={store} />,
         document.getElementById('root')
     );
 }
-subscribe(rerenderRoutTree)
+store.subscribe(rerenderRoutTree)
 rerenderRoutTree()
