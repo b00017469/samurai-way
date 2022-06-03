@@ -25,14 +25,20 @@ export type StateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type AddNewTextareaActionType = {
+    type: 'ADD-NEW-TEXTAREA-VALUE'
+    message: string
+}
+export type ActionType = AddPostActionType | AddNewTextareaActionType
 export type StoreType = {
     _state: StateType
-    getState:()=>StateType
-    addPost: ()=>void
-    addNewTextareaValue:(massage: string)=>void
-    renderTree:()=>void
-    subscribe:(callback: () => void)=>void
+    _callSubscriber: () => void
+    getState: () => StateType
+    dispatch:(action:ActionType)=>void
+    subscribe: (callback: () => void) => void
 }
 
 const store: StoreType = {
@@ -62,23 +68,26 @@ const store: StoreType = {
         },
         sidebar: {}
     },
-    getState(){return this._state},
-    addPost() {
-        this._state.profilePage.posts.push({
-            id: '4', message: this._state.profilePage.newTextAreaValue, likesCount: 0
-        })
-        this.renderTree()
-        this.addNewTextareaValue('')
+    _callSubscriber() {
+        console.log('State changed')
     },
-    addNewTextareaValue(massage: string) {
-        this._state.profilePage.newTextAreaValue = massage
-        this.renderTree()
+    getState() {
+        return this._state
     },
-    renderTree() {
-        console.log('hello')
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this._state.profilePage.posts.push({
+                id: '4', message: this._state.profilePage.newTextAreaValue, likesCount: 0
+            })
+            this._callSubscriber()
+            this._state.profilePage.newTextAreaValue = ''
+        } else if (action.type === 'ADD-NEW-TEXTAREA-VALUE') {
+            this._state.profilePage.newTextAreaValue = action.message
+            this._callSubscriber()
+        }
     },
     subscribe(callback: () => void) {
-        this.renderTree = callback
+        this._callSubscriber = callback
     }
 }
 

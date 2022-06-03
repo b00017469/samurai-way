@@ -24,8 +24,7 @@ const App: React.FC<StateIndexType> = (props) => {
                     <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage}/>}/>
                     <Route path='/profile'
                            render={() => <Profile posts={props.store.getState().profilePage}
-                                                  addPost={props.store.addPost.bind(props.store)}
-                                                  addArea={props.store.addNewTextareaValue.bind(props.store)}/>}/>
+                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

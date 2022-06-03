@@ -9,11 +9,11 @@ const MyPosts: React.FC<ProfileType> = (props) => {
     let postElement = props.posts.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (value: string) => {
-        props.addArea(value)
+        props.dispatch({type:"ADD-NEW-TEXTAREA-VALUE", message:value})
     }
 
     const onAddPost = () => {
-        props.addPost()
+        props.dispatch({type:"ADD-POST"})
     }
 
 
