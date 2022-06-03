@@ -8,10 +8,10 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from "./Redux/State";
+import store from "./Redux/redux-store";
 
 type StateIndexType = {
-    store: StoreType
+
 }
 
 const App: React.FC<StateIndexType> = (props) => {
@@ -21,10 +21,10 @@ const App: React.FC<StateIndexType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs data={props.store}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs />}/>
                     <Route path='/profile'
-                           render={() => <Profile posts={props.store.getState().profilePage}
-                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                           render={() => <Profile posts={store.getState().profilePage}
+                                                  dispatch={store.dispatch.bind(store)}/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
