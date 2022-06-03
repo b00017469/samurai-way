@@ -1,7 +1,8 @@
-import React, {ChangeEventHandler} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {ProfileType} from "../Profile";
+import {addNewTextareaValueAC, addPostAC} from "../../../Redux/State";
 
 
 const MyPosts: React.FC<ProfileType> = (props) => {
@@ -9,13 +10,12 @@ const MyPosts: React.FC<ProfileType> = (props) => {
     let postElement = props.posts.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (value: string) => {
-        props.dispatch({type:"ADD-NEW-TEXTAREA-VALUE", message:value})
+        props.dispatch(addNewTextareaValueAC(value))
     }
 
     const onAddPost = () => {
-        props.dispatch({type:"ADD-POST"})
+        props.dispatch(addPostAC())
     }
-
 
     return <div className={s.postsBlock}>
         <h3>My posts</h3>

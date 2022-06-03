@@ -1,3 +1,7 @@
+
+const ADD_POST = 'ADD-POST'
+const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
+
 type DialogsType = {
     id: string
     name: string
@@ -26,10 +30,10 @@ export type StateType = {
     sidebar: SidebarType
 }
 type AddPostActionType = {
-    type: 'ADD-POST'
+    type: typeof ADD_POST
 }
 type AddNewTextareaActionType = {
-    type: 'ADD-NEW-TEXTAREA-VALUE'
+    type: typeof ADD_NEW_TEXTAREA_VALUE
     message: string
 }
 export type ActionType = AddPostActionType | AddNewTextareaActionType
@@ -90,5 +94,8 @@ const store: StoreType = {
         this._callSubscriber = callback
     }
 }
+export const addPostAC = ():AddPostActionType =>({type: ADD_POST})
+export const addNewTextareaValueAC = (message:string):AddNewTextareaActionType =>
+    ({type: ADD_NEW_TEXTAREA_VALUE, message})
 
 export default store;
