@@ -2,7 +2,7 @@ import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {ProfileType} from "../Profile";
-import {addNewTextareaValueAC, addPostAC} from "../../../Redux/State";
+import {addNewTextareaValueAC, addPostAC} from "../../../Redux/profile-reducer";
 
 
 const MyPosts: React.FC<ProfileType> = (props) => {

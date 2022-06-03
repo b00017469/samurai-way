@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
-const ADD_NEW_TEXT_MESSAGE = 'ADD-NEW-TEXT-MASSAGE'
+import profileReducer, {AddNewTextareaActionType, AddPostActionType} from "./profile-reducer";
+import dialogsReducer, {AddMessageActionType, AddNewTextMessageActionType} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 type DialogsType = {
     id: string
@@ -31,20 +30,7 @@ export type StateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-type AddPostActionType = {
-    type: typeof ADD_POST
-}
-type AddMessageActionType = {
-    type: typeof ADD_MESSAGE
-}
-type AddNewTextareaActionType = {
-    type: typeof ADD_NEW_TEXTAREA_VALUE
-    message: string
-}
-type AddNewTextMessageActionType = {
-    type: typeof ADD_NEW_TEXT_MESSAGE
-    message: string
-}
+
 export type ActionType =
     AddPostActionType
     | AddNewTextareaActionType
@@ -93,35 +79,15 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            this._state.profilePage.posts.push({
-                id: '4', message: this._state.profilePage.newTextAreaValue, likesCount: 0
-            })
-            this._callSubscriber()
-            this._state.profilePage.newTextAreaValue = ''
-        } else if (action.type === ADD_NEW_TEXTAREA_VALUE) {
-            this._state.profilePage.newTextAreaValue = action.message
-            this._callSubscriber()
-        } else if (action.type === ADD_NEW_TEXT_MESSAGE) {
-            this._state.dialogsPage.newTextMessage = action.message
-            this._callSubscriber()
-        } else if (action.type === ADD_MESSAGE) {
-            this._state.dialogsPage.messages.push({
-                id: '4', message: this._state.dialogsPage.newTextMessage
-            })
-            this._state.dialogsPage.newTextMessage = ''
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber()
     },
     subscribe(callback: () => void) {
         this._callSubscriber = callback
     }
 }
-export const addPostAC = (): AddPostActionType => ({type: ADD_POST})
-export const addNewTextareaValueAC = (message: string): AddNewTextareaActionType =>
-    ({type: ADD_NEW_TEXTAREA_VALUE, message})
-export const addMessageAC = (): AddMessageActionType => ({type: ADD_MESSAGE})
-export const addNewTextMessageAC = (message: string): AddNewTextMessageActionType =>
-    ({type: ADD_NEW_TEXT_MESSAGE, message})
 
 export default store;
