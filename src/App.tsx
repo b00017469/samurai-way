@@ -21,7 +21,7 @@ const App: React.FC<StateIndexType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs data={props.store}/>}/>
                     <Route path='/profile'
                            render={() => <Profile posts={props.store.getState().profilePage}
                                                   dispatch={props.store.dispatch.bind(props.store)}/>}/>

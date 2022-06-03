@@ -1,6 +1,7 @@
-
 const ADD_POST = 'ADD-POST'
+const ADD_MESSAGE = 'ADD-MESSAGE'
 const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
+const ADD_NEW_TEXT_MESSAGE = 'ADD-NEW-TEXT-MASSAGE'
 
 type DialogsType = {
     id: string
@@ -22,6 +23,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
+    newTextMessage: string
 }
 export type SidebarType = {}
 export type StateType = {
@@ -32,16 +34,27 @@ export type StateType = {
 type AddPostActionType = {
     type: typeof ADD_POST
 }
+type AddMessageActionType = {
+    type: typeof ADD_MESSAGE
+}
 type AddNewTextareaActionType = {
     type: typeof ADD_NEW_TEXTAREA_VALUE
     message: string
 }
-export type ActionType = AddPostActionType | AddNewTextareaActionType
+type AddNewTextMessageActionType = {
+    type: typeof ADD_NEW_TEXT_MESSAGE
+    message: string
+}
+export type ActionType =
+    AddPostActionType
+    | AddNewTextareaActionType
+    | AddNewTextMessageActionType
+    | AddMessageActionType
 export type StoreType = {
     _state: StateType
     _callSubscriber: () => void
     getState: () => StateType
-    dispatch:(action:ActionType)=>void
+    dispatch: (action: ActionType) => void
     subscribe: (callback: () => void) => void
 }
 
@@ -68,7 +81,8 @@ const store: StoreType = {
                 {id: '1', message: "Hello!"},
                 {id: '2', message: "How are you?"},
                 {id: '3', message: "Be be be!!!"}
-            ]
+            ],
+            newTextMessage: ""
         },
         sidebar: {}
     },
@@ -79,14 +93,23 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._state.profilePage.posts.push({
                 id: '4', message: this._state.profilePage.newTextAreaValue, likesCount: 0
             })
             this._callSubscriber()
             this._state.profilePage.newTextAreaValue = ''
-        } else if (action.type === 'ADD-NEW-TEXTAREA-VALUE') {
+        } else if (action.type === ADD_NEW_TEXTAREA_VALUE) {
             this._state.profilePage.newTextAreaValue = action.message
+            this._callSubscriber()
+        } else if (action.type === ADD_NEW_TEXT_MESSAGE) {
+            this._state.dialogsPage.newTextMessage = action.message
+            this._callSubscriber()
+        } else if (action.type === ADD_MESSAGE) {
+            this._state.dialogsPage.messages.push({
+                id: '4', message: this._state.dialogsPage.newTextMessage
+            })
+            this._state.dialogsPage.newTextMessage = ''
             this._callSubscriber()
         }
     },
@@ -94,8 +117,11 @@ const store: StoreType = {
         this._callSubscriber = callback
     }
 }
-export const addPostAC = ():AddPostActionType =>({type: ADD_POST})
-export const addNewTextareaValueAC = (message:string):AddNewTextareaActionType =>
+export const addPostAC = (): AddPostActionType => ({type: ADD_POST})
+export const addNewTextareaValueAC = (message: string): AddNewTextareaActionType =>
     ({type: ADD_NEW_TEXTAREA_VALUE, message})
+export const addMessageAC = (): AddMessageActionType => ({type: ADD_MESSAGE})
+export const addNewTextMessageAC = (message: string): AddNewTextMessageActionType =>
+    ({type: ADD_NEW_TEXT_MESSAGE, message})
 
 export default store;

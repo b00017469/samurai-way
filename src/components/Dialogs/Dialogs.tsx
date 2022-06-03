@@ -1,24 +1,27 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType} from "../../Redux/State";
+import {addMessageAC, addNewTextMessageAC, DialogsPageType, StoreType} from "../../Redux/State";
 
-type DialogsType ={
-    data:DialogsPageType
+type DialogsType = {
+    data: StoreType
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    let dialogsElement = props.data.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let dialogsElement = props.data.getState().dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name}
+                                                                                        id={d.id}/>)
 
-    let messageElement = props.data.messages.map(m => <Message message={m.message}/>)
+    let messageElement = props.data.getState().dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    let newMessage = React.createRef<HTMLTextAreaElement>()
+    /* let newMessage = React.createRef<HTMLTextAreaElement>()*/
 
     const addMessageHandler = () => {
-        let message = newMessage.current?.value
-      alert(message)
+        props.data.dispatch(addMessageAC())
+    }
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.data.dispatch(addNewTextMessageAC(e.currentTarget.value))
     }
 
     return (
@@ -27,9 +30,16 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                 {dialogsElement}
             </div>
             <div className={s.messages}>
-                {messageElement}
-                <textarea ref={newMessage}></textarea>
-                <button onClick={addMessageHandler}>Add message</button>
+                <div>{messageElement}</div>
+                <div>
+                    <div>
+                        <textarea placeholder='Enter your message' onChange={onChangeHandler}
+                                   value={props.data.getState().dialogsPage.newTextMessage}></textarea>
+                    </div>
+                    <div>
+                        <button onClick={addMessageHandler}>Add message</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
