@@ -19,7 +19,7 @@ export type ProfilePageType = {
     posts: PostsType[]
     newTextAreaValue: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newTextMessage: string

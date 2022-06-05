@@ -1,5 +1,4 @@
 import React from "react";
-import Post from "./Post/Post";
 import {ProfileType} from "../Profile";
 import {addNewTextareaValueAC, addPostAC} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
@@ -17,7 +16,8 @@ const MyPostsContainer: React.FC<ProfileType> = (props) => {
         props.dispatch(addPostAC())
     }
 
-    return    (<MyPosts addPost={onAddPost} onChangePostText={onChangeHandler}
+    return    (<MyPosts addPost={onAddPost}
+                        onChangePostText={onChangeHandler}
                         profilePage={postElement}/>)
 }
 
