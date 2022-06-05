@@ -2,27 +2,28 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addMessageAC, addNewTextMessageAC} from "../../Redux/dialogs-reducer";
 import store from "../../Redux/redux-store";
+import {DialogsPageType} from "../../Redux/Store";
 
 type DialogsType = {
-
+    dialogsPage: DialogsPageType
+    addMessage: () => void
+    onChangeMessageText: (text: string) => void
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    let dialogsElement = store.getState().dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name}
-                                                                                        id={d.id}/>)
+    let dialogsElement = props.dialogsPage.dialogs
+        .map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
 
-    let messageElement = store.getState().dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
-
-    /* let newMessage = React.createRef<HTMLTextAreaElement>()*/
+    let messageElement = props.dialogsPage.messages
+        .map(m => <Message key={m.id} message={m.message}/>)
 
     const addMessageHandler = () => {
-        store.dispatch(addMessageAC())
+        props.addMessage()
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        store.dispatch(addNewTextMessageAC(e.currentTarget.value))
+        props.onChangeMessageText(e.currentTarget.value)
     }
 
     return (
@@ -35,7 +36,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                 <div>
                     <div>
                         <textarea placeholder='Enter your message' onChange={onChangeHandler}
-                                   value={store.getState().dialogsPage.newTextMessage}></textarea>
+                                  value={store.getState().dialogsPage.newTextMessage}>1</textarea>
                     </div>
                     <div>
                         <button onClick={addMessageHandler}>Add message</button>
