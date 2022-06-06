@@ -26,21 +26,18 @@ const initialState: ProfilePageType = {
     ],
     newTextAreaValue: ""
 }
-const profileReducer = (state = initialState, action: ActionType):ProfilePageType => {
-    const copyState = {...state}
-    copyState.posts= [...state.posts]
+const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
-            copyState.posts.push({
-                id: '4', message: state.newTextAreaValue, likesCount: 0
-            })
-            copyState.newTextAreaValue = ''
-            return copyState
+            return {
+                ...state,
+                posts: [...state.posts, {id: '4', message: state.newTextAreaValue, likesCount: 0}],
+                newTextAreaValue: ''
+            }
         case ADD_NEW_TEXTAREA_VALUE:
-            copyState.newTextAreaValue = action.message
-            return copyState
+            return {...state, newTextAreaValue: action.message}
         default:
-            return copyState
+            return state
     }
 }
 export const addPostAC = (): AddPostActionType => ({type: ADD_POST})
