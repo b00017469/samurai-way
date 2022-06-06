@@ -1,20 +1,14 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { ProfilePageType} from "../../../Redux/Store";
+import {PostsPropsType} from "./MyPostsContainer";
 
-type MyPostType = {
-    onChangePostText:(value:string)=>void
-    addPost:()=>void
-    profilePage: ProfilePageType
-}
-
-const MyPosts: React.FC<MyPostType> = (props) => {
+const MyPosts: React.FC<PostsPropsType> = (props) => {
 
     let postElement = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (value: string) => {
-        props.onChangePostText(value)
+        props.addNewTextareaValue(value)
     }
 
     const onAddPost = () => {

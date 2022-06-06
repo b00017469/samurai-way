@@ -1,7 +1,16 @@
-import {ActionType, ProfilePageType} from "./Store";
+import {ActionType} from "./Store";
 
 const ADD_POST = 'ADD-POST'
 const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
+type PostsType = {
+    id: string
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: PostsType[]
+    newTextAreaValue: string
+}
 export type AddPostActionType = {
     type: typeof ADD_POST
 }
@@ -17,19 +26,21 @@ const initialState: ProfilePageType = {
     ],
     newTextAreaValue: ""
 }
-const profileReducer = (state = initialState, action: ActionType) => {
+const profileReducer = (state = initialState, action: ActionType):ProfilePageType => {
+    const copyState = {...state}
+    copyState.posts= [...state.posts]
     switch (action.type) {
         case ADD_POST:
-            state.posts.push({
+            copyState.posts.push({
                 id: '4', message: state.newTextAreaValue, likesCount: 0
             })
-            state.newTextAreaValue = ''
-            return state
+            copyState.newTextAreaValue = ''
+            return copyState
         case ADD_NEW_TEXTAREA_VALUE:
-            state.newTextAreaValue = action.message
-            return state
+            copyState.newTextAreaValue = action.message
+            return copyState
         default:
-            return state
+            return copyState
     }
 }
 export const addPostAC = (): AddPostActionType => ({type: ADD_POST})

@@ -22,7 +22,7 @@ export type AddNewTextMessageActionType = {
     type: typeof ADD_NEW_TEXT_MESSAGE
     message: string
 }
-const initialState:DialogsPageType = {
+const initialState: DialogsPageType = {
     dialogs: [
         {id: '1', name: "Dimych"},
         {id: '2', name: "Masha"},
@@ -39,20 +39,22 @@ const initialState:DialogsPageType = {
     newTextMessage: ""
 }
 
-const dialogsReducer = (state = initialState, action: ActionType):DialogsPageType => {
+const dialogsReducer = (state = initialState, action: ActionType): DialogsPageType => {
+    const copyState = {...state}
+    copyState.dialogs = [...state.dialogs]
+    copyState.messages = [...state.messages]
     switch (action.type) {
         case ADD_NEW_TEXT_MESSAGE:
-            let copyState = {...state}
             copyState.newTextMessage = action.message
             return copyState
         case ADD_MESSAGE:
-            state.messages.push({
+            copyState.messages.push({
                 id: '4', message: state.newTextMessage
             })
-            state.newTextMessage = ''
-            return state
+            copyState.newTextMessage = ''
+            return copyState
         default:
-            return state
+            return copyState
     }
 }
 export const addMessageAC = (): AddMessageActionType => ({type: ADD_MESSAGE})

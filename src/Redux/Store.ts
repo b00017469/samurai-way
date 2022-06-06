@@ -15,7 +15,7 @@ type PostsType = {
     message: string
     likesCount: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: PostsType[]
     newTextAreaValue: string
 }
