@@ -31,7 +31,7 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-export type ActionType =
+type ActionType =
     AddPostActionType
     | AddNewTextareaActionType
     | AddNewTextMessageActionType

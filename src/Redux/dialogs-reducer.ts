@@ -1,4 +1,5 @@
-import {ActionType} from "./Store";
+import {ActionType} from "./actionType";
+
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const ADD_NEW_TEXT_MESSAGE = 'ADD-NEW-TEXT-MASSAGE'
@@ -10,11 +11,7 @@ type MessagesType = {
     id: string
     message: string
 }
-export type DialogsPageType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
-    newTextMessage: string
-}
+
 export type AddMessageActionType = {
     type: typeof ADD_MESSAGE
 }
@@ -22,7 +19,9 @@ export type AddNewTextMessageActionType = {
     type: typeof ADD_NEW_TEXT_MESSAGE
     message: string
 }
-const initialState: DialogsPageType = {
+export type InitialStateDialogsType = typeof initialState
+
+const initialState = {
     dialogs: [
         {id: '1', name: "Dimych"},
         {id: '2', name: "Masha"},
@@ -30,16 +29,16 @@ const initialState: DialogsPageType = {
         {id: '4', name: "Victor"},
         {id: '5', name: "Tosha"},
         {id: '6', name: "Vova"}
-    ],
+    ] as DialogsType[],
     messages: [
         {id: '1', message: "Hello!"},
         {id: '2', message: "How are you?"},
         {id: '3', message: "Be be be!!!"}
-    ],
+    ] as MessagesType[],
     newTextMessage: ""
 }
 
-const dialogsReducer = (state = initialState, action: ActionType): DialogsPageType => {
+const dialogsReducer = (state:InitialStateDialogsType = initialState, action: ActionType): InitialStateDialogsType => {
     switch (action.type) {
         case ADD_NEW_TEXT_MESSAGE:
             return {...state, newTextMessage: action.message}

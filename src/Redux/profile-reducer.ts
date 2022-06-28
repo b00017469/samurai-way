@@ -1,4 +1,4 @@
-import {ActionType} from "./Store";
+import {ActionType} from "./actionType";
 
 const ADD_POST = 'ADD-POST'
 const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'

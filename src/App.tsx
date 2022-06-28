@@ -9,25 +9,25 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import store from "./Redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-type StateIndexType = {
+type StateIndexType = {}
 
-}
-
-const App: React.FC<StateIndexType> = (props) => {
+const App: React.FC<StateIndexType> = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer  />}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/profile'
                            render={() => <Profile posts={store.getState().profilePage}
                                                   dispatch={store.dispatch.bind(store)}/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
 
             </div>

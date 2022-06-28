@@ -11,7 +11,7 @@ const MyPosts: React.FC<PostsPropsType> = (props) => {
         props.addNewTextareaValue(value)
     }
 
-    const onAddPost = () => {
+    const addPost = () => {
         props.addPost()
     }
 
@@ -23,7 +23,7 @@ const MyPosts: React.FC<PostsPropsType> = (props) => {
                           value={props.profilePage.newTextAreaValue}/>
             </div>
             <div>
-                <button onClick={onAddPost}>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
         </div>
         <div className={s.posts}>
