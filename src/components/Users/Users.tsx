@@ -6,12 +6,30 @@ import defaultUserPhoto from "../../assets/images/defultAvatar.png"
 
 
 class Users extends React.Component<UsersPropsType> {
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then((response) => this.props.setUsers(response.data.items))
+    onPageChanged(page:number):void{
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+            .then((response) => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
     }
     render() {
+        const pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i < pagesCount; i++) {
+            pages.push(i)
+        }
+        let curP = this.props.currentPage;
+        let curPF = ((curP - 5) < 0) ?  0  : curP - 5 ;
+        let curPL = curP + 5;
+        let slicedPages = pages.slice( curPF, curPL);
         return <div>
+            <div className={styles.spanHovered}>
+                {slicedPages.map(page => <span
+                    className={this.props.currentPage===page?styles.selectedPage:''}
+                onClick={()=>{this.onPageChanged(page)}}>-{page}-</span>)}
+            </div>
             {this.props.users.map(user => <div key={user.id}>
             <span>
                 <div>
