@@ -13,6 +13,6 @@ export type MapDispatchPropsType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number)=>void
     setTotalUsersCount: (totalCount: number)=>void
-    toggleIsFetching: (isFetching:boolean)=>void
+    setIsFetching: (isFetching:boolean)=>void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
