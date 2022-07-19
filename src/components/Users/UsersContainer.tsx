@@ -21,7 +21,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                 this.props.setTotalUsersCount(response.data.totalCount)
             })
     }
-
     onPageChanged(page: number): void {
         this.props.setIsFetching(true)
         this.props.setCurrentPage(page)
@@ -31,7 +30,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                 this.props.setUsers(response.data.items)
             })
     }
-
     render() {
         return <>
             {this.props.isFetching ? <Preloader/>
