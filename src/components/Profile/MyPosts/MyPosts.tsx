@@ -5,7 +5,7 @@ import {PostsPropsType} from "./MyPostsContainer";
 
 const MyPosts: React.FC<PostsPropsType> = (props) => {
 
-    let postElement = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postElement = props.profilePage.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (value: string) => {
         props.addNewTextareaValue(value)

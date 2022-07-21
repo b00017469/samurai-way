@@ -8,6 +8,7 @@ import {
     SetUsersActionType,
     UnfollowActionType
 } from "./users-reducer";
+import {SetUserDataType} from "./auth-reducer";
 
 export type ActionType =
     AddPostActionType
@@ -21,3 +22,4 @@ export type ActionType =
     | SetTotalUsersCountActionType
     | SetIsFetchingActionType
     | SetUserProfileType
+    | SetUserDataType
