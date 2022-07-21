@@ -1,4 +1,4 @@
-import profileReducer, {AddNewTextareaActionType, AddPostActionType} from "./profile-reducer";
+import profileReducer, {AddNewTextareaActionType, AddPostActionType, UserProfileType} from "./profile-reducer";
 import dialogsReducer, {AddMessageActionType, AddNewTextMessageActionType} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
@@ -18,6 +18,7 @@ type PostsType = {
 type ProfilePageType = {
     posts: PostsType[]
     newTextAreaValue: string
+    profile: UserProfileType
 }
 type DialogsPageType = {
     dialogs: DialogsType[]
@@ -52,7 +53,28 @@ const store: StoreType = {
                 {id: '2', message: "This is my first post.", likesCount: 11},
                 {id: '3', message: "This is my first post.", likesCount: 11}
             ],
-            newTextAreaValue: ""
+            newTextAreaValue: "",
+            profile: {
+                "aboutMe": "я круто чувак 1001%",
+                "contacts": {
+                    "facebook": "facebook.com",
+                    "website": null,
+                    "vk": "vk.com/dimych",
+                    "twitter": "https://twitter.com/@sdf",
+                    "instagram": "instagra.com/sds",
+                    "youtube": null,
+                    "github": "github.com",
+                    "mainLink": null
+                },
+                "lookingForAJob": true,
+                "lookingForAJobDescription": "не ищу, а дурачусь",
+                "fullName": "samurai dimych",
+                "userId": 2,
+                "photos": {
+                    "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+                    "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+                }
+            }
         },
         dialogsPage: {
             dialogs: [
