@@ -15,11 +15,11 @@ export const userAPI = {
         return instance.get(`profile/${userId ? userId : '2'}`)
             .then((response)=>response.data)
     },
-    follow(userId: number) {
+    unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
             .then((response)=>response.data)
     },
-    unfollow(userId: number){
+    follow(userId: number){
         return instance.post(`follow/${userId}`, {})
             .then((response)=>response.data)
     },

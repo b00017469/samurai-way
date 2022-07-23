@@ -11,10 +11,8 @@ export type MapStatePropsType = {
 export type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (currentPage: number)=>void
-    setTotalUsersCount: (totalCount: number)=>void
-    setIsFetching: (isFetching:boolean)=>void
     setFollowingProgress: (isFetching: boolean, userId: number)=>void
+    getUsers: (pageSize: number, currentPage: number) =>void
+    getUsersPageChanged: (pageSize: number, currentPage: number) =>void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
