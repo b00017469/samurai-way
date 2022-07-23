@@ -27,7 +27,6 @@ const App: React.FC<StateIndexType> = () => {
                     <Route path='/settings' render={() => <Settings/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
-
             </div>
         </BrowserRouter>
     );

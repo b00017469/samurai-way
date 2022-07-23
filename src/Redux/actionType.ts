@@ -2,7 +2,7 @@ import {AddNewTextareaActionType, AddPostActionType, SetUserProfileType} from ".
 import {AddMessageActionType, AddNewTextMessageActionType} from "./dialogs-reducer";
 import {
     FollowActionType,
-    SetCurrentPageActionType,
+    SetCurrentPageActionType, SetFollowingProgressActionType,
     SetIsFetchingActionType,
     SetTotalUsersCountActionType,
     SetUsersActionType,
@@ -23,3 +23,4 @@ export type ActionType =
     | SetIsFetchingActionType
     | SetUserProfileType
     | SetUserDataType
+    | SetFollowingProgressActionType

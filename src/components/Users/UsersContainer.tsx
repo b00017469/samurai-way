@@ -1,6 +1,14 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import {follow, setCurrentPage, setIsFetching, setTotalUsersCount, setUsers, unfollow} from "../../Redux/users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setFollowingProgress,
+    setIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
+} from "../../Redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import {MapStatePropsType, UsersPropsType} from "./types";
@@ -43,7 +51,9 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                     onPageChanged={this.onPageChanged}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
-                    pageSize={this.props.pageSize}/>}
+                    pageSize={this.props.pageSize}
+                    followingInProgress={this.props.followingInProgress}
+                    setFollowingProgress={this.props.setFollowingProgress}/>}
         </>
     }
 }
@@ -54,11 +64,12 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
 export default connect(mapStateToProps, {
     follow, unfollow, setUsers, setCurrentPage,
-    setTotalUsersCount, setIsFetching
+    setTotalUsersCount, setIsFetching, setFollowingProgress
 })(UsersAPIComponent);
