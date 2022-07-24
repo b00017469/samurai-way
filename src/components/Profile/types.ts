@@ -5,7 +5,7 @@ export type MapStateToPropsType = {
     profile:UserProfileType
 }
 export type MapDispatchToPropsType = {
-    setUserProfile: (userProfile: UserProfileType) => void
+    getUserProfile: (userId: string) => void
 
 }
 export type PathParamsType = {

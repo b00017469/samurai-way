@@ -1,4 +1,6 @@
 import {ActionType} from "./actionType";
+import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
@@ -15,6 +17,7 @@ export type SetUserProfileType = {
     type: typeof SET_USER_PROFILE
     profile: UserProfileType
 }
+export type UserProfileType = typeof initialState.profile
 
 const initialState = {
     posts: [
@@ -67,28 +70,11 @@ export const addPostAC = (): AddPostActionType => ({type: ADD_POST})
 export const addNewTextareaValueAC = (message: string): AddNewTextareaActionType =>
     ({type: ADD_NEW_TEXTAREA_VALUE, message})
 export const setUserProfile = (userProfile: UserProfileType): SetUserProfileType =>
-    ({type: SET_USER_PROFILE, profile:userProfile})
+    ({type: SET_USER_PROFILE, profile: userProfile})
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+    userAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
+}
 export default profileReducer
-
-export type UserProfileType = typeof initialState.profile
-   /* {
-    "aboutMe": string
-    "contacts": {
-        "facebook": string
-        "website": string
-        "vk": string | null
-        "twitter": string | null
-        "instagram": string | null
-        "youtube": string | null
-        "github":string | null
-        "mainLink": string | null
-    },
-    "lookingForAJob": boolean
-    "lookingForAJobDescription": string | null
-    "fullName": string
-    "userId": number,
-    "photos": {
-        "small": string
-        "large": string
-    }
-}*/

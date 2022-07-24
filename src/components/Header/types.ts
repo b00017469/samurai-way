@@ -5,6 +5,6 @@ export type MapStatePropsType = {
     avatar: string
 }
 export type MapDispatchPropsType = {
-    setUserData: (data: UserDataType) => void
+    getAuthUserData: () => void
 }
 export type HeaderPropsType = MapStatePropsType & MapDispatchPropsType
