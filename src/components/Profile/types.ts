@@ -3,6 +3,7 @@ import {RouteComponentProps} from "react-router-dom";
 
 export type MapStateToPropsType = {
     profile:UserProfileType
+    isAuth: boolean
 }
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void

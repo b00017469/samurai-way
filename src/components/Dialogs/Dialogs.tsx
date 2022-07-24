@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
@@ -18,6 +19,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateMessageText(e.currentTarget.value)
     }
+    if (!props.isAuth) return <Redirect to={'./login'}/>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
@@ -28,7 +30,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>
                     <div>
                         <textarea placeholder='Enter your message' onChange={onChangeHandler}
-                                  value={props.dialogsPage.newTextMessage}></textarea>
+                                  value={props.dialogsPage.newTextMessage}> </textarea>
                     </div>
                     <div>
                         <button onClick={addMessageHandler}>Add message</button>
