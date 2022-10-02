@@ -1,6 +1,6 @@
 import {ActionType} from "./actionType";
-import {Dispatch} from "redux";
 import {userAPI} from "../api/api";
+import {AppThunk} from "./redux-store";
 
 const ADD_POST = 'ADD-POST'
 const ADD_NEW_TEXTAREA_VALUE = 'ADD-NEW-TEXTAREA-VALUE'
@@ -71,7 +71,7 @@ export const addNewTextareaValueAC = (message: string): AddNewTextareaActionType
     ({type: ADD_NEW_TEXTAREA_VALUE, message})
 export const setUserProfile = (userProfile: UserProfileType): SetUserProfileType =>
     ({type: SET_USER_PROFILE, profile: userProfile})
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string):AppThunk => (dispatch) => {
     userAPI.getProfile(userId)
         .then(data => {
             dispatch(setUserProfile(data))

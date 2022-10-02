@@ -5,7 +5,7 @@ import {UserProfilePropsType} from "./types";
 
 const Profile: React.FC<UserProfilePropsType> = (props) => {
     return <div>
-        <ProfileInfo profile ={props.profile}/>
+        <ProfileInfo profile={props.profile}/>
         <MyPostsContainer/>
     </div>
 }
