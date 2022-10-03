@@ -1,4 +1,9 @@
-import {AddNewTextareaActionType, AddPostActionType, SetUserProfileType} from "./profile-reducer";
+import {
+    AddNewTextareaActionType,
+    AddPostActionType,
+    SetUserProfileStatusType,
+    SetUserProfileType
+} from "./profile-reducer";
 import {AddMessageActionType, AddNewTextMessageActionType} from "./dialogs-reducer";
 import {
     FollowActionType,
@@ -24,3 +29,4 @@ export type ActionType =
     | SetUserProfileType
     | SetUserDataType
     | SetFollowingProgressActionType
+    | SetUserProfileStatusType

@@ -19,6 +19,7 @@ type ProfilePageType = {
     posts: PostsType[]
     newTextAreaValue: string
     profile: UserProfileType
+    status: string
 }
 type DialogsPageType = {
     dialogs: DialogsType[]
@@ -54,6 +55,7 @@ const store: StoreType = {
                 {id: '3', message: "This is my first post.", likesCount: 11}
             ],
             newTextAreaValue: "",
+            status: '',
             profile: {
                 "aboutMe": "я круто чувак 1001%",
                 "contacts": {

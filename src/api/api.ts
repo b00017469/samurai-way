@@ -12,8 +12,8 @@ export const userAPI = {
             .then((response) => response.data)
     },
     getProfile(userId:string){
-        return instance.get(`profile/${userId ? userId : '2'}`)
-            .then((response)=>response.data)
+        console.warn('use profileAPI')
+        return profileAPI.getProfile(userId)
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
@@ -28,5 +28,18 @@ export const authAPI ={
     me(){
         return instance.get(`auth/me`)
             .then((response)=>response.data)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId:string){
+        return instance.get(`profile/${userId}`)
+            .then((response)=>response.data)
+    },
+    getStatus(userId: string){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(statusMessage:string){
+        return instance.put(`profile/status`, {status: statusMessage})
     }
 }
