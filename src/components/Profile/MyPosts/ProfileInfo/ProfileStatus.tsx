@@ -5,9 +5,13 @@ type ProfileStatusProps = {
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
 }
+type stateProfileStatus = {
+    editMode: boolean
+    status: string
+}
 
 class ProfileStatus extends React.Component<ProfileStatusProps> {
-    state = {
+    state: stateProfileStatus = {
         editMode: false,
         status: this.props.status
     }
@@ -28,6 +32,14 @@ class ProfileStatus extends React.Component<ProfileStatusProps> {
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<ProfileStatusProps>, prevState: Readonly<stateProfileStatus>) {
+        if (prevState.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
     render() {
         return (<div>
                 {this.state.editMode
@@ -41,7 +53,7 @@ class ProfileStatus extends React.Component<ProfileStatusProps> {
                     :
                     <div>
                         <span
-                            onDoubleClick={this.activatedEditMode}>{this.props.status + '!'}</span>
+                            onDoubleClick={this.activatedEditMode}>{this.props.status || '------'}</span>
                     </div>}
             </div>
         );
